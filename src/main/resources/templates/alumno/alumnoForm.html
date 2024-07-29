@@ -11,7 +11,7 @@
 			</div>
 			<div class="container">
 				
-				<form th:object="${alumno}" th:action="@{/alumno/nuevo}" method="post">
+				<form th:object="${alumno}" th:action="@{/alumno/guardar}" th:method="post">
 					<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger alert-dismissible fade show" role="alert">
 						<strong>Un incoveniente!</strong>
 							Por favor verifique lo ingresado.
