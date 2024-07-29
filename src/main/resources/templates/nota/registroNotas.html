@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="disenoBase::site-head"></head>
+<body>
+    <header th:replace="disenoBase::site-header"></header>
+    
+    <main role="main">
+        <div class="container" id="divRegistroNota">
+            <article>
+                <header>
+                    <h4 class="text-primary">Registrar Nota</h4>
+                </header>
+                <form th:action="@{/nota/registrar}" th:object="${nota}" method="post">
+                    <div class="form-group">
+                        <label for="alumno">Alumno:</label>
+                        <select th:field="*{alumno.id}" class="form-control">
+                            <option th:each="alumno : ${alumnos}" th:value="${alumno.id}" th:text="${alumno.nombres + ' ' + alumno.apellidos}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="curso">Curso:</label>
+                        <select th:field="*{curso.id}" class="form-control">
+                            <option th:each="curso : ${cursos}" th:value="${curso.id}" th:text="${curso.nombre}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="unidad1">Unidad 1:</label>
+                        <input type="number" th:field="*{unidad1}" class="form-control" min="0" max="20" step="1"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="unidad2">Unidad 2:</label>
+                        <input type="number" th:field="*{unidad2}" class="form-control" min="0" max="20" step="1"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="unidad3">Unidad 3:</label>
+                        <input type="number" th:field="*{unidad3}" class="form-control" min="0" max="20" step="1"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </article>
+        </div>        
+    </main>
+    <footer th:replace="disenoBase::site-footer"></footer>
+</body>
+</html>
