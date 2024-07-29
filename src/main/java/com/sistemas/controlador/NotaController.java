@@ -45,8 +45,8 @@ public class NotaController {
 	}
 
 	@PostMapping("/matricula/guardar")
-	public String postMatriculaForm(@RequestParam Long id,
-			@RequestParam(required = false) List<Long> idsSeleccionados) {
+	public String postMatriculaForm(@RequestParam("id") Long id,
+            @RequestParam(name = "idsSeleccionados", required = false) List<Long> idsSeleccionados) {
 
 		Stream<Nota> notasActuales1 = notaService.listarPorAlumno(id).stream();
 		Stream<Nota> notasActuales2 = notaService.listarPorAlumno(id).stream();
