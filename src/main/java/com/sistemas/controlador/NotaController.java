@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,25 @@ public class NotaController {
 	@Autowired private AlumnoService alumnoService;
 	@Autowired private CursoService cursoService;
 
+	@GetMapping("/index")
+    public String getRegistroNotasForm(Model model) {
+		
+		List<Alumno> alumnos = alumnoService.listarTodos();
+        List<Curso> cursos = cursoService.listarTodos();
+        Nota nota = new Nota();
+        model.addAttribute("nota", nota);
+        model.addAttribute("alumnos", alumnos);
+        model.addAttribute("cursos", cursos);
+        return "nota/registroNotas";
+
+    }
+	
+	@PostMapping("/registrar")
+    public String registrarNota(@ModelAttribute("nota") Nota nota) {
+		notaService.actualizarNotas(nota.getAlumno().getId(), nota.getCurso().getId(), nota.getUnidad1(), nota.getUnidad2(), nota.getUnidad3());
+		return "redirect:/alumno/index";
+    }
+	
 	@GetMapping("/matricular/{id}")
 	public String getMatriculaForm(Model model, @PathVariable("id") Long idAlumno) {
 

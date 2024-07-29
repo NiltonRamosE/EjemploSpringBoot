@@ -49,4 +49,9 @@ public class NotaServiceImpl implements NotaService {
     public List<Nota> listarTodasConAlumnosYCursos() {
         return notaRepository.findAllWithAlumnosAndCursos();
     }
+	
+	@Override
+    public void actualizarNotas(Long idAlumno, Long idCurso, Double unidad1, Double unidad2, Double unidad3) {
+        notaRepository.actualizarNotas(idAlumno, idCurso, unidad1, unidad2, unidad3);
+    }
 }
