@@ -1,0 +1,35 @@
+<html>
+<head th:replace="~{_frag/Base::site-head}"></head>
+<body>
+	<header th:replace="~{_frag/Base::site-header}"></header>
+	<article class="container mt-3">
+		<h2>Datos de Docente</h2>
+		<form th:object="${docente}" th:action="@{/docente/guardar}" th:method="post">
+			<div th:replace="~{_frag/Inputs::iHtml(hidden,
+				'ID:', '', 'id')}"></div>
+			<div th:replace="~{_frag/Inputs::iHtml(text,
+				'Apellidos:', 'Ingrese Apellidos', 'apellidos')}"></div>
+			<div th:replace="~{_frag/Inputs::iHtml(text,
+				'Nombres:', 'Ingrese Nombres', 'nombres')}"></div>
+			<div th:replace="~{_frag/Inputs::iHtml(text,
+				'DNI:', 'Ingrese DNI', 'dni')}"></div>
+			<div th:replace="~{_frag/Inputs::iHtml(date,
+				'Fecha Nacimiento:', '', 'fechaNacimiento')}"></div>
+			<div th:replace="~{_frag/Inputs::iHtml(text,
+				'Dirección:', 'Ingrese Dirección', 'direccion')}"></div>
+			<div th:replace="~{_frag/Inputs::iHtml(tel,
+				'Celular:', 'Ingrese Celular', 'celular')}"></div>
+			<div th:replace="~{_frag/Inputs::iHtml(email,
+				'eMail:', 'Ingrese correo electrónico', 'eMail')}"></div>
+			<div th:replace="~{_frag/Inputs::iHtml(text,
+				'Especialidad:', 'Ingrese Especialidad', 'especialidad')}"></div>
+			<div th:replace="~{_frag/Inputs::iHtml(date,
+				'Fecha Ingreso:', '', 'fechaIngreso')}"></div>
+			<div>
+				<button type="submit" class="btn btn-outline-primary">Aceptar</button>
+				<a th:href="@{/docente/index}" class="btn btn-outline-secondary">Cancelar</a>
+			</div>
+		</form>
+	</article>
+</body>
+</html>

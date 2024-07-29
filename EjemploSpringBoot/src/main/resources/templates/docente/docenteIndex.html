@@ -1,0 +1,55 @@
+<html>
+<head th:replace="~{_frag/Base::site-head}"></head>
+<body>
+	<header th:replace="~{_frag/Base::site-header}"></header>
+	<article class="container mt-3">
+		<h2>Listado de Docentes</h2>
+		<div>
+			<a th:href="@{/docente/nuevo}" class="btn btn-outline-primary">
+				Agregar Docente</a>
+			<a th:href="@{/}" class="btn btn-outline-secondary">Cerrar</a>
+		</div>
+		<div>
+			<table class="table table-striped mt-2 table-bordered" id="listadoDocente">
+				<thead>
+					<tr class="table-primary">
+						<td>Apellidos</td>
+						<td>Nombres</td>
+						<td>DNI</td>
+						<td>Celular</td>
+						<td>eMail</td>
+						<td>Especialidad</td>
+						<td>Fecha Ingreso</td>
+						<td>Editar</td>
+						<td>Eliminar</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="docente : ${listaDocentes}">
+						<td th:text="${docente.apellidos}">Apellidos</td>
+						<td th:text="${docente.nombres}">Nombres</td>
+						<td th:text="${docente.dni}">DNI</td>
+						<td th:text="${docente.celular}">Celular</td>
+						<td th:text="${docente.eMail}">eMail</td>
+						<td th:text="${docente.especialidad}">Especialidad</td>
+						<td th:text="${#calendars.format(
+							docente.fechaIngreso, 'dd/MM/yyyy')}">
+							Fecha Ingreso</td>
+						<td><a th:href="@{/docente/editar/{id}(id=${docente.id})}"
+							class="btn btn-outline-warning btn-sm">
+							Editar</a></td>
+						<td><a th:href="@{/docente/eliminar/{id}(id=${docente.id})}"
+							class="btn btn-outline-danger btn-sm">
+							Eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div>
+			<a th:href="@{/docente/nuevo}" class="btn btn-outline-primary">
+				Agregar Docente</a>
+			<a th:href="@{/}" class="btn btn-outline-secondary">Cerrar</a>
+		</div>
+	</article>
+</body>
+</html>
