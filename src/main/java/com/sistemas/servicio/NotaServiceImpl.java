@@ -44,4 +44,9 @@ public class NotaServiceImpl implements NotaService {
 	public List<Nota> listarPorAlumno(Long idAlumno) {
 		return notaRepository.findByAlumnoId(idAlumno);
 	}
+	
+	@Override
+    public List<Nota> listarTodasConAlumnosYCursos() {
+        return notaRepository.findAllWithAlumnosAndCursos();
+    }
 }

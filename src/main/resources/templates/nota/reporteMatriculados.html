@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="disenoBase::site-head"></head>
+<body>
+    <header th:replace="disenoBase::site-header"></header>
+    
+    <main role="main">
+        <div class="container" id="divReporteMatriculados">
+            <article>
+                <header>
+                    <h4 class="text-primary">Reporte de Matriculados</h4>
+                </header>
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Nombre Alumno</th>
+                            <th>Curso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+						<tr th:each="nota : ${notas}">
+							<td th:text="${nota.alumno.nombres} + ' ' + ${nota.alumno.apellidos}"></td>
+							<td th:text="${nota.curso.nombre}"></td>
+						</tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">
+                                <a class="btn btn-outline-primary" th:href="@{/alumno/index}" role="button">
+                                    Regresar
+                                </a>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </article>
+        </div>        
+    </main>
+    <footer th:replace="disenoBase::site-footer"></footer>
+</body>
+</html>
