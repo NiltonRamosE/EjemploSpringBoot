@@ -127,4 +127,20 @@ public class NotaController {
 		
 		return "nota/cuadroMerito";
 	}
+	
+	@GetMapping("/boleta")
+    public String mostrarFormularioSeleccion(Model model) {
+        List<Alumno> alumnos = alumnoService.listarTodos();
+        model.addAttribute("alumnos", alumnos);
+        return "nota/boletaForm";
+    }
+	
+	@PostMapping("/verNotas")
+    public String mostrarBoletaNotas(@RequestParam("alumnoId") Long alumnoId, Model model) {
+        Alumno alumno = alumnoService.buscar(alumnoId);
+        List<Nota> notas = notaService.listarPorAlumno(alumnoId);
+        model.addAttribute("alumno", alumno);
+        model.addAttribute("notas", notas);
+        return "nota/verNotas";
+    }
 }
