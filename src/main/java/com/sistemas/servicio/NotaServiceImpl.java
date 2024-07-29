@@ -1,6 +1,7 @@
 package com.sistemas.servicio;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,29 @@ public class NotaServiceImpl implements NotaService {
 	@Override
     public void actualizarNotas(Long idAlumno, Long idCurso, Double unidad1, Double unidad2, Double unidad3) {
         notaRepository.actualizarNotas(idAlumno, idCurso, unidad1, unidad2, unidad3);
+    }
+	
+	@Override
+    public List<Object[]> findAverageGradesPerCourse() {
+        return notaRepository.findAverageGradesPerCourse();
+    }
+
+    @Override
+    public List<Object[]> calculateFinalAverages() {
+        List<Object[]> averagesPerCourse = findAverageGradesPerCourse();
+
+        return averagesPerCourse.stream()
+            .collect(Collectors.groupingBy(row -> (Long) row[0]))
+            .entrySet().stream()
+            .map(entry -> {
+                Long alumnoId = entry.getKey();
+                List<Object[]> courses = entry.getValue();
+                double finalAverage = courses.stream()
+                    .mapToDouble(row -> (Double) row[1])
+                    .average().orElse(0.0);
+                return new Object[]{alumnoId, finalAverage};
+            })
+            .sorted((a, b) -> Double.compare((Double) b[1], (Double) a[1]))
+            .collect(Collectors.toList());
     }
 }

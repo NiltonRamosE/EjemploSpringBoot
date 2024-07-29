@@ -109,4 +109,22 @@ public class NotaController {
         return "nota/reporteMatriculados";
 
     }
+	
+	@GetMapping("/cuadromeritos")
+	public String getCuadroMeritosView(Model model) {
+		
+		List<Object[]> ranking = notaService.calculateFinalAverages();
+        List<Object[]> rankingConNombre = ranking.stream()
+            .map(row -> {
+                Long alumnoId = (Long) row[0];
+                String nombreCompleto = alumnoService.buscar(alumnoId).getNombres() + " " + alumnoService.buscar(alumnoId).getApellidos();
+                Double promedioFinal = (Double) row[1];
+                return new Object[]{nombreCompleto, promedioFinal};
+            })
+            .collect(Collectors.toList());
+        
+        model.addAttribute("ranking", rankingConNombre);
+		
+		return "nota/cuadroMerito";
+	}
 }
