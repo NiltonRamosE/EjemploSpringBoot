@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="disenoBase::site-head"></head>
+<body>
+    <header th:replace="disenoBase::site-header"></header>
+    
+    <main role="main">
+        <div class="container" id="divSeleccionarAlumno">
+            <article>
+                <header>
+                    <h4 class="text-primary">Seleccionar Alumno</h4>
+                </header>
+                <form action="#" th:action="@{/nota/verNotas}" method="post">
+                    <div class="form-group">
+                        <label for="alumnoSelect">Alumno</label>
+                        <select id="alumnoSelect" name="alumnoId" class="form-control" required>
+                            <option th:each="alumno : ${alumnos}" th:value="${alumno.id}" th:text="${alumno.nombres} + ' ' + ${alumno.apellidos}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ver Notas</button>
+                </form>
+            </article>
+        </div>        
+    </main>
+    <footer th:replace="disenoBase::site-footer"></footer>
+</body>
+</html>

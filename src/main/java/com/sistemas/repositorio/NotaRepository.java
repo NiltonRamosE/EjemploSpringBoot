@@ -29,4 +29,8 @@ public interface NotaRepository extends JpaRepository<Nota, NotaID> {
         @Param("unidad2") Double unidad2,
         @Param("unidad3") Double unidad3
     );
+	
+	@Query("SELECT n.alumno.id, AVG((n.unidad1 + n.unidad2 + n.unidad3) / 3) AS promedioCurso " +
+	           "FROM Nota n GROUP BY n.alumno.id")
+	    List<Object[]> findAverageGradesPerCourse();
 }

@@ -109,4 +109,38 @@ public class NotaController {
         return "nota/reporteMatriculados";
 
     }
+	
+	@GetMapping("/cuadromeritos")
+	public String getCuadroMeritosView(Model model) {
+		
+		List<Object[]> ranking = notaService.calculateFinalAverages();
+        List<Object[]> rankingConNombre = ranking.stream()
+            .map(row -> {
+                Long alumnoId = (Long) row[0];
+                String nombreCompleto = alumnoService.buscar(alumnoId).getNombres() + " " + alumnoService.buscar(alumnoId).getApellidos();
+                Double promedioFinal = (Double) row[1];
+                return new Object[]{nombreCompleto, promedioFinal};
+            })
+            .collect(Collectors.toList());
+        
+        model.addAttribute("ranking", rankingConNombre);
+		
+		return "nota/cuadroMerito";
+	}
+	
+	@GetMapping("/boleta")
+    public String mostrarFormularioSeleccion(Model model) {
+        List<Alumno> alumnos = alumnoService.listarTodos();
+        model.addAttribute("alumnos", alumnos);
+        return "nota/boletaForm";
+    }
+	
+	@PostMapping("/verNotas")
+    public String mostrarBoletaNotas(@RequestParam("alumnoId") Long alumnoId, Model model) {
+        Alumno alumno = alumnoService.buscar(alumnoId);
+        List<Nota> notas = notaService.listarPorAlumno(alumnoId);
+        model.addAttribute("alumno", alumno);
+        model.addAttribute("notas", notas);
+        return "nota/verNotas";
+    }
 }
