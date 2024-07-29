@@ -79,4 +79,14 @@ public class NotaController {
 			});
 		return "redirect:/alumno/index";
 	}
+	
+	@GetMapping("/matriculados")
+    public String getReporteMatriculados(Model model) {
+		
+		List<Nota> todasLasNotas = notaService.listarTodasConAlumnosYCursos();
+        model.addAttribute("notas", todasLasNotas);
+
+        return "nota/reporteMatriculados";
+
+    }
 }
