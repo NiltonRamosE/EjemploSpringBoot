@@ -29,8 +29,8 @@ public class NotaController {
 	@Autowired private AlumnoService alumnoService;
 	@Autowired private CursoService cursoService;
 
-	@GetMapping("/matricular/{idAlumno}")
-	public String getMatriculaForm(Model model, @PathVariable Long idAlumno) {
+	@GetMapping("/matricular/{id}")
+	public String getMatriculaForm(Model model, @PathVariable("id") Long idAlumno) {
 
 		Alumno alumno = alumnoService.buscar(idAlumno);
 		List<Long> idCursosActuales = notaService.listarPorAlumno(idAlumno).stream()

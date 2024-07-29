@@ -23,6 +23,7 @@
 						    <th>Promedio</th>
 						    <th>Editar</th>
 							<th>Eliminar</th>
+							<th>Matricula</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -42,6 +43,7 @@
 							<td><a class="btn btn-outline-danger btn-sm"
 								th:href="@{/alumno/eliminar/}+${alumno.id}">
 								Eliminar</a></td>
+							<td><a class="btn btn-outline-warning btn-sm" th:href="@{/nota/matricular/}+${alumno.id}">Matricular</a></td>
 						</tr>
 					</tbody>
 					<tfoot>
