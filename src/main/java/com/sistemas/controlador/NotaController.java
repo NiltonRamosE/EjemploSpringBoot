@@ -29,8 +29,8 @@ public class NotaController {
 	@Autowired private AlumnoService alumnoService;
 	@Autowired private CursoService cursoService;
 
-	@GetMapping("/matricular/{idAlumno}")
-	public String getMatriculaForm(Model model, @PathVariable Long idAlumno) {
+	@GetMapping("/matricular/{id}")
+	public String getMatriculaForm(Model model, @PathVariable("id") Long idAlumno) {
 
 		Alumno alumno = alumnoService.buscar(idAlumno);
 		List<Long> idCursosActuales = notaService.listarPorAlumno(idAlumno).stream()
@@ -45,8 +45,8 @@ public class NotaController {
 	}
 
 	@PostMapping("/matricula/guardar")
-	public String postMatriculaForm(@RequestParam Long id,
-			@RequestParam(required = false) List<Long> idsSeleccionados) {
+	public String postMatriculaForm(@RequestParam("id") Long id,
+            @RequestParam(name = "idsSeleccionados", required = false) List<Long> idsSeleccionados) {
 
 		Stream<Nota> notasActuales1 = notaService.listarPorAlumno(id).stream();
 		Stream<Nota> notasActuales2 = notaService.listarPorAlumno(id).stream();

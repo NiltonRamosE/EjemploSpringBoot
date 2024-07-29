@@ -59,7 +59,7 @@ public class AlumnoController {
 		return "redirect:/alumno/index";
 	}
 
-	@GetMapping("pathminar/{id}")
+	@GetMapping("eliminar/{id}")
 	public String alumnoEliminar(Model model,
 			@PathVariable("id") Long idAlumno) {
 		

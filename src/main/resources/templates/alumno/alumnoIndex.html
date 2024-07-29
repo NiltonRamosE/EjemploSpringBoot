@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="disenoBase::site-header"></head>
+<head th:replace="disenoBase::site-head"></head>
 <body>
 	<header th:replace="disenoBase::site-header"></header>
 	
@@ -23,12 +23,13 @@
 						    <th>Promedio</th>
 						    <th>Editar</th>
 							<th>Eliminar</th>
+							<th>Matricula</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="alumno : ${listaAlumnos}">
-							<td th:text="${alumno.apellido}"></td>
-							<td th:text="${alumno.nombre}"></td>
+							<td th:text="${alumno.apellidos}"></td>
+							<td th:text="${alumno.nombres}"></td>
 							<td th:text="${alumno.dni}"></td>
 							<td th:text="${#calendars.format(
 								alumno.fechaNacimiento, 'dd/MM/yyyy')}"></td>
@@ -42,6 +43,7 @@
 							<td><a class="btn btn-outline-danger btn-sm"
 								th:href="@{/alumno/eliminar/}+${alumno.id}">
 								Eliminar</a></td>
+							<td><a class="btn btn-outline-warning btn-sm" th:href="@{/nota/matricular/}+${alumno.id}">Matricular</a></td>
 						</tr>
 					</tbody>
 					<tfoot>
