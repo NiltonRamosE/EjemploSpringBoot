@@ -36,16 +36,16 @@
 						<label for="inputApellido">Apellidos: </label>
 						<input type="text" id="inputApellido" placeholder="ingrese apellidos"
 								 th:class="${#fields.hasErrors('*')}
-								 			? (${#fields.hasErrors('apellido')}
+								 			? (${#fields.hasErrors('apellidos')}
 												? 'form-control is-invalid'
 												: 'form-control is-valid')
 											: 'form-control'"
-								  th:field="*{apellido}" th:value="*{apellido}"/>
+								  th:field="*{apellidos}" th:value="*{apellidos}"/>
 						<div class="valid-feedback">
 							<small>Correcto!</small>
 						</div>
 						<div class="invalid-feedback">
-							<small th:errors="*{apellido}">Error</small>
+							<small th:errors="*{apellidos}">Error</small>
 						</div>
 					</div>
 					
@@ -53,16 +53,16 @@
 						<label for="inputNombre">Nombres: </label>
 						<input type="text" id="inputNombre" placeholder="ingrese nombres"
 								 th:class="${#fields.hasErrors('*')}
-								 			? (${#fields.hasErrors('nombre')}
+								 			? (${#fields.hasErrors('nombres')}
 												? 'form-control is-invalid'
 												: 'form-control is-valid')
 											: 'form-control'"
-								  th:field="*{nombre}" th:value="*{nombre}"/>
+								  th:field="*{nombres}" th:value="*{nombres}"/>
 						<div class="valid-feedback">
 							<small>Correcto!</small>
 						</div>
 						<div class="invalid-feedback">
-							<small th:errors="*{nombre}">Error</small>
+							<small th:errors="*{nombres}">Error</small>
 						</div>
 					</div>
 					
